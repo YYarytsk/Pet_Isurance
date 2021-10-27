@@ -1,0 +1,73 @@
+<div class="container" style="margin-bottom: 100px;">
+  <div class="row">
+    <div class="col-mb-6">
+      <div class="card">
+        <div class="text center">
+          <h1>Sign Up</h1>
+          <h6>Please Register.</h6>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <!-- <label for="exampleInputPassword1" class="form-label">First Name</label> -->
+            <input formControlName="firstName" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="First Name">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['firstName'].dirty && registerForm.hasError('required','firstName')">*Required</span>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="exampleInputPassword1" class="form-label">Last Name</label> -->
+            <input formControlName="lastName" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="Last Name">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['lastName'].dirty && registerForm.hasError('required','lastName')">*Required</span>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="exampleInputPassword1" class="form-label">User Name</label> -->
+            <input formControlName="userName" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="User Name">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['userName'].dirty && registerForm.hasError('required','userName')">*Required</span>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="exampleInputPassword1" class="form-label">Password</label> -->
+            <input formControlName="password" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="Password">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['password'].dirty && registerForm.hasError('required','password')">*Required</span>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="exampleInputPassword1" class="form-label">DOB</label> -->
+            <input formControlName="doB" type="date" class="form-control" id="exampleInputPassword1" placeholder="DOB">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['doB'].dirty && registerForm.hasError('required','doB')">*Required</span>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="exampleInputPassword1" class="form-label">Location</label> -->
+            <input formControlName="location" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="Your State">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['location'].dirty && registerForm.hasError('required','location')">*Required</span>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="exampleInputPassword1" class="form-label">Phone Number</label> -->
+            <input formControlName="phoneNumber" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="Phone Number">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['phoneNumber'].dirty && registerForm.hasError('required','phoneNumber')">*Required</span>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="exampleInputEmail1" class="form-label">Email address</label> -->
+            <input formControlName="email" type="text" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Email">
+            <span class="text-danger"
+              *ngIf="registerForm.controls['email'].dirty && registerForm.hasError('required','email')">*Required</span>
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Sign-Up</button>
+        </form>
+        <a style="margin-top: 10px;" routerLink="/account/login">Already registered? Login Here.</a>
+      </div>
+    </div>
+  </div>
+</div>

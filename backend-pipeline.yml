@@ -1,0 +1,112 @@
+#Backend 
+trigger:
+- master
+
+pr:
+- master
+- Main-Dev
+
+pool:
+  vmImage: ubuntu-latest
+
+variables: #Path to folders
+  sDir: 'WebAPI'
+  solution: 'WebAPI/*.sln'
+  cReg: '2107-p3-acr-Group2-Pet Insurance'
+
+
+stages:
+- stage: DotNet_Sonar
+  jobs:
+  #Prepare the sonar cloud
+    - job: Scanner
+      displayName: 'Run Sonar Analysis'
+      steps:
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'Insurance Scanner'
+          organization: '210726-wvu-net-ext'
+          scannerMode: 'MSBuild'
+          projectKey: '210726-wvu-net-ext_Group2-P3-Pet_Insurance'
+          projectName: 'Group2-P3-Pet_Insurance'
+          extraProperties: |
+            'sonar.exclusions=**/lib/**/*'
+            sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/*/coverage.opencover.xml
+  #Build and test dotnet code
+      # Force dotnet 5
+      - task: UseDotNet@2
+        displayName: Dotnet SDK 5
+        inputs:
+          packageType: 'sdk'
+          version: '5.x'
+      #Install nuGet
+      - task: NuGetToolInstaller@1
+        inputs:
+          checkLatest: true
+      #Restore solution
+      - task: NuGetCommand@2
+        inputs:
+          restoreSolution: $(solution)
+      #Build
+      - task: CmdLine@2
+        displayName: Dotnet Build
+        inputs:
+          script: 'dotnet build --configuration Release'
+          workingDirectory: $(sDir)
+      #Test
+      - task: CmdLine@2
+        displayName: Dotnet Tests
+        inputs:
+          script: dotnet test
+            --configuration Release
+            --collect:"XPlat Code Coverage"
+            --results-directory $(Agent.TempDirectory)
+            --
+            DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          workingDirectory: $(sDir)
+        continueOnError: true
+      # Force dotnet 3.1
+      - task: UseDotNet@2
+        displayName: Dotnet SDK 3
+        inputs:
+          packageType: 'runtime'
+          version: '3.1.x'
+    #Analyze
+      - task: SonarCloudAnalyze@1
+        displayName: 'Run SonarCloud analysis'
+    #Publish
+      - task: SonarCloudPublish@1
+        displayName: 'Publish results on build summary'
+- stage: Docker
+  jobs:
+  #Build and eventally deploy a docker container
+    - job: Docker_Build
+      displayName: Docker Build & Push
+      steps:
+      #Login
+      - task: Docker@2
+        displayName: Login
+        inputs:
+          containerRegistry: $(cReg)
+          command: 'login'
+      #Build
+      - task: Docker@2
+        displayName: Build & Push
+        inputs:
+          containerRegistry: '$(cReg)'
+          repository: 'gecko/backend'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
+          tags: 'latest'
+      #Publish artifact
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(sDir)/WebAPI.yml'
+          artifact: 'manifest'
+          publishLocation: 'pipeline'
+      #logout
+      - task: Docker@2
+        displayName: Logout
+        inputs:
+          containerRegistry: $(cReg)
+          command: 'logout'

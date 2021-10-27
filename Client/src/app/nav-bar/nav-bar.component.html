@@ -1,0 +1,28 @@
+<div class="justify-content-md-between " style="padding-left: 250px; padding-right: 250px;">
+    <div class="container">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 ">
+            <div class="col-md-6">
+                <button routerLink="/account/questionnaire" type="button" class="btn btn-outline-primary me-2">Add
+                    Pet</button>
+                <button routerLink="/account/plans" type="button" class="btn btn-outline-primary me-2">Insurance
+                    Plans</button>
+                <button routerLink="/account/about-us" type="button" class="btn btn-outline-primary me-2">About
+                    Us</button>
+                <button routerLink="/account/contact-us" type="button" class="btn btn-outline-primary me-2">Contact
+                    Us</button>
+            </div>
+            <div class="col-md-3 text-end">
+                <button *ngIf="!accountService.isLogged()" routerLink="/account/login" type="button"
+                    class="btn btn-outline-primary me-2">Login</button>
+                <button *ngIf="!accountService.isLogged()" routerLink="/account/register" type="button"
+                    class="btn btn-outline-primary">Sign-up</button>
+                <div *ngIf="accountService.user$ | async as user"> {{user.firstName}}
+                </div>
+                <button (click)="accountService.logOut()" *ngIf="accountService.isLogged()" routerLink="/account/login"
+                    type="button" class="btn btn-outline-primary">Sign-out</button>
+
+            </div>
+        </header>
+    </div>
+</div>

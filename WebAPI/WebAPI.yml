@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gecko
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: gecko-api
+  name: azure-load-balancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: gecko
+    role: api
+  ports:
+  - port: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gecko-backend
+  labels:
+    app: gecko
+    role: api
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: gecko
+      role: api
+  template:
+    metadata:
+      labels:
+        app: gecko
+        role: api
+    spec:
+      imagePullSecrets:
+      - name: geckoback
+      containers:
+      - name: api
+        image: bacoordinationp3.azurecr.io/gecko/backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4200

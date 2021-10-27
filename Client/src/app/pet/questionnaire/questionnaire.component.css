@@ -1,0 +1,19 @@
+.card{
+    border: none;
+    width: 700px;
+    padding: 40px;
+    position: relative;
+    max-height: fit-content;
+    max-block-size: 900px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(128, 245, 219);
+    background: linear-gradient(90deg, rgb(128, 245, 219) 0%, rgb(165, 223, 233));
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+ /* .main{
+    background-image: url(/assets/images/lizard1.jpg);
+} */

@@ -1,0 +1,61 @@
+<div class="container overflow-hidden" style="margin-bottom: 200px;">
+    <!-- <div *ngFor="let plan of plans">{{plan.petId}} -->
+
+
+
+
+
+    <div class="row">
+        <div class="col" style="margin-left: 200px;">
+            <div class="form-check" style="color: silver;">
+                <input class="form-check-input" type="radio" name="" id="-silver">
+                <label class="form-check-label" for="-silver" style="font-size: 2em;">
+                    Choose Silver
+                </label>
+            </div>
+        </div>
+        <div class="col" style="margin-right: 200px;">
+            <div class="form-check" style="color: gold;">
+                <input class="form-check-input" type="radio" name="" id="-gold">
+                <label class="form-check-label" for="-gold" style="font-size: 2em;">
+                    Choose Gold
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <form class="contact-form" (submit)="sendEmail($event)">
+            <div class="col" style="margin-left: 200px; margin-right: 200px; margin-top: 50px;">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address:</label>
+                    <input name="email" id="email" type="text" class="form-control" id="exampleFormControlInput1"
+                        placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Provide your name:</label>
+                    <input name="name" id="name" type="text" class="form-control" id="exampleFormControlInput1"
+                        placeholder="John Dow">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">If you have any coments please provide
+                        them
+                        below.</label>
+                    <textarea name="message" id="message" class="form-control" id="exampleFormControlTextarea1"
+                        rows="3"></textarea>
+                </div>
+                <div style="text-align:left">
+                    <div class="controls"></div>
+                    <button type="submit" class="btn btn-success"
+                        style="padding: 15px; ">Purchase</button>
+                    <!-- <button type="submit" class="btn btn-success" style="padding: 15px; margin: 15px;">Send a
+                        request</button> -->
+                    <button routerLink="/account/questionnaire" type="button" class="btn btn-danger"
+                        style="padding: 15px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>

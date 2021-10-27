@@ -1,0 +1,98 @@
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"
+  id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="container">
+  <div class="row-fluid">
+    <form [formGroup]="form" class="form-horizontal">
+      <fieldset>
+        <div id="legend">
+          <legend class="">Payment</legend>
+        </div>
+
+        <!-- Name -->
+        <div class="control-group">
+          <label class="control-label" for="username">Card Holder's Name</label>
+          <div class="controls">
+            <input formControlName="username" type="text" id="username" name="username" placeholder=""
+              class="input-xlarge">
+            <span class="text-danger"
+              *ngIf="form.controls['username'].dirty && form.hasError('required','username')">*Required</span>
+          </div>
+        </div>
+
+        <!-- Card Number -->
+        <div class="control-group">
+          <label class="control-label" for="email">Card Number</label>
+          <div class="controls">
+            <input formControlName="cardNumber" type="text" id="email" name="email" placeholder="" class="input-xlarge">
+            <span class="text-danger"
+              *ngIf="form.controls['cardNumber'].dirty && form.hasError('required','cardNumber')">*Required</span>
+          </div>
+        </div>
+
+        <!-- Expiry-->
+        <div class="control-group">
+          <label class="control-label" for="password">Card Expiry Date</label>
+          <div class="controls">
+            <select formControlName="expiry_month" class="span3" name="expiry_month" id="expiry_month">
+              <span class="text-danger"
+                *ngIf="form.controls['expiry_month'].dirty && form.hasError('required','expiry_month')">*Required</span>
+              <option></option>
+              <option value="01">Jan (01)</option>
+              <option value="02">Feb (02)</option>
+              <option value="03">Mar (03)</option>
+              <option value="04">Apr (04)</option>
+              <option value="05">May (05)</option>
+              <option value="06">June (06)</option>
+              <option value="07">July (07)</option>
+              <option value="08">Aug (08)</option>
+              <option value="09">Sep (09)</option>
+              <option value="10">Oct (10)</option>1
+              <option value="11">Nov (11)</option>
+              <option value="12">Dec (12)</option>
+            </select>
+            <select formControlName="expiry_year" class="span2" name="expiry_year">
+              <span class="text-danger"
+                *ngIf="form.controls['expiry_year'].dirty && form.hasError('required','expiry_year')">*Required</span>
+              <option value="21">2021</option>
+              <option value="22">2022</option>
+              <option value="23">2023</option>
+              <option value="23">2024</option>
+              <option value="23">2025</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CVV -->
+        <div class="control-group">
+          <label class="control-label" for="password_confirm">Card CVV</label>
+          <div class="controls">
+            <input formControlName="password" type="password" id="password_confirm" name="password_confirm"
+              placeholder="" class="span2">
+            <span class="text-danger"
+              *ngIf="form.controls['password'].dirty && form.hasError('required','password')">*Required</span>
+          </div>
+        </div>
+        <!-- </div> -->
+
+        <!-- Save card -->
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox" for="save_card">
+              <input type="checkbox" id="save_card" value="option1">
+              Save card on file?
+            </label>
+          </div>
+          <!-- Submit -->
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" [disabled]="!form.valid" routerLink="../purchase-status" class="btn btn-success">Pay Now</button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

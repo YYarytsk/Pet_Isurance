@@ -1,0 +1,117 @@
+<body>
+    
+
+<div class="card" style="margin-bottom: 180px; margin-top: 300px; flex-wrap: wrap; position:relative">
+    <div class="container">
+        <span class="example-spacer">
+        <div class="col">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row" style="padding: 15px;">
+                    <h5 class="row">Breed</h5>
+                    <select formControlName="breed" class="form-select" aria-label="Default select example"
+                        style="padding: 10px;">
+                        <option selected>Please select breed of your pet.</option>
+                        <option value="Crested Gecko">Crested Gecko</option>
+                        <option value="Panther Chameleon">Panther Chameleon</option>
+                        <option value="Blue Tongued Skink">Blue Tongued Skink</option>
+                        <option value="Mountain Horned Dragon">Mountain Horned Dragon</option>
+                        <option value="Spiny-Tailed Monitor">Spiny-Tailed Monitor</option>
+                        <option value="Green Basilisk">Green Basilisk</option>
+                        <option value="Veiled Chameleon">Veiled Chameleon</option>
+                        <option value="Leopard Gecko">Leopard Gecko</option>
+                        <option value="Moroccan Uromastyx">Moroccan Uromastyx</option>
+                        <option value="Bearded Dragon">Bearded Dragon</option>
+                    </select>
+                </div>
+                <div class="row" style="padding: 15px;">
+                    <h5 class="row">Age</h5>
+                    <div class="" aria-label="Default select example" style="padding: 10px;">
+                        <label for="customRange3" class="form-label">Please select age of your pet.</label>
+                        <input formControlName="age" type="range" class="form-range" value="12.5" min="0" max="25"
+                            step=".1" id="customRange3" oninput="this.nextElementSibling.value = this.value">
+                        <output>12.5</output>
+                        <h6>Lizard's Age</h6>
+                    </div>
+                </div>
+                <div class="row" style="padding: 15px;">
+                    <h5 class="row">State</h5>
+                    <select formControlName="location" class="form-select" aria-label="Default select example"
+                        style="padding: 10px;">
+                        <option selected>Please select your state.</option>
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="California">California</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="D.C.">D.C.</option>
+                        <option value="Delaware">Delaware</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusetts">Massachusetts</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="New York">New York</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="36">Ohio</option>
+                        <option value="Ohio">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                    </select>
+                </div>
+                <div style="text-align:center">
+                    <button type="submit" class="btn btn-outline-primary me-2" style="padding: 15px;">Add a
+                        Lizard</button>
+                    <button type="button" routerLink="../quote" class="btn btn-outline-primary" style="padding: 15px;">Get a
+                        Quote</button>
+                </div>
+            </form>
+            <!-- <button routerLink="../quote" class="btn btn-outline-primary" style="padding: 15px;">Get a
+                Quote</button> -->
+                <div style="text-align: left; margin-top: 20px;">
+                    <ul>
+                        <li *ngFor="let pet of pets">
+                            {{pet.breed}}
+                            {{pet.age}}
+                            {{pet.location}}
+                        </li>
+                    </ul>
+                </div>
+            
+        </div>
+    </span>
+    </div>
+</div>
+</body>
